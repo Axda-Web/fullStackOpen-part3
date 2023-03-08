@@ -28,7 +28,6 @@ let persons = [
 
 const generateId = () => Math.floor(Math.random() * 1000);
 
-
 app.get("/info", (request, response) => {
   response.send(`
         <div>
@@ -69,9 +68,23 @@ app.post("/api/persons", (request, response) => {
     });
   }
 
+  if (!body.number) {
+    return response.status(400).json({
+      error: "Number missing",
+    });
+  }
+
+  const alreadyExist = !!persons.find((person) => person.name === body.name);
+
+  if (alreadyExist) {
+    return response.status(400).json({
+      error: "Person already exist",
+    });
+  }
+
   const person = {
     name: body.name,
-    number: body.number || "",
+    number: body.number,
     id: generateId(),
   };
 
