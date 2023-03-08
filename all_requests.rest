@@ -1,0 +1,15 @@
+# Get info
+GET http://localhost:3001/info
+###
+
+# Get all persons
+GET http://localhost:3001/api/persons
+###
+
+# Get person with id
+GET http://localhost:3001/api/persons/1
+###
+
+# Delete person with id
+DELETE http://localhost:3001/api/persons/1
+###
