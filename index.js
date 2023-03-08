@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
 
+app.use(express.json());
+
 let persons = [
   {
     id: 1,
@@ -23,6 +25,9 @@ let persons = [
     number: "39-23-6423122",
   },
 ];
+
+const generateId = () => Math.floor(Math.random() * 1000);
+
 
 app.get("/info", (request, response) => {
   response.send(`
@@ -53,6 +58,26 @@ app.delete("/api/persons/:id", (request, response) => {
   persons = persons.filter((person) => person.id !== id);
 
   response.status(204).end();
+});
+
+app.post("/api/persons", (request, response) => {
+  const body = request.body;
+
+  if (!body.name) {
+    response.status(404).json({
+      error: "Missing name",
+    });
+  }
+
+  const person = {
+    name: body.name,
+    number: body.number || "",
+    id: generateId(),
+  };
+
+  persons = [...persons, person];
+
+  response.json(person);
 });
 
 const PORT = 3001;
