@@ -13,3 +13,12 @@ GET http://localhost:3001/api/persons/1
 # Delete person with id
 DELETE http://localhost:3001/api/persons/1
 ###
+
+# Add a new person
+POST http://localhost:3001/api/persons
+Content-Type: application/json
+
+{
+    "name": "Roger Petit",
+    "number": "01 23 45 67 89"
+}
