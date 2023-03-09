@@ -24,6 +24,11 @@ const App = () => {
     event.preventDefault();
     const existingPerson = persons.find(({ name }) => name === newName);
 
+    if (!newName || !newNumber) {
+      window.alert("You have to provide a name AND a number!");
+      return;
+    }
+
     if (existingPerson) {
       if (
         window.confirm(
