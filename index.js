@@ -51,10 +51,9 @@ app.get("/info", (request, response) => {
 });
 
 app.get("/api/people", (request, response) => {
-  Person.find({})
-    .then((people) => {
-      response.json(people);
-    })
+  Person.find({}).then((people) => {
+    response.json(people);
+  });
 });
 
 app.get("/api/people/:id", (request, response) => {
