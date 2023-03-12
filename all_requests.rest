@@ -2,20 +2,20 @@
 GET http://localhost:3001/info
 ###
 
-# Get all persons
-GET http://localhost:3001/api/persons
+# Get all people
+GET http://localhost:3001/api/people
 ###
 
 # Get person with id
-GET http://localhost:3001/api/persons/640af38f36bdda11d5b92453
+GET http://localhost:3001/api/people/640af38f36bdda11d5b92453
 ###
 
 # Delete person with id
-DELETE http://localhost:3001/api/persons/1
+DELETE http://localhost:3001/api/people/1
 ###
 
 # Add a new person
-POST http://localhost:3001/api/persons
+POST http://localhost:3001/api/people
 Content-Type: application/json
 
 {

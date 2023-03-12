@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import personService from "./services/persons";
+import personService from "./services/people";
 import Search from "./components/Search";
 import Form from "./components/Form";
 import People from "./components/People";
 import Notification from "./components/Notification";
 
 const App = () => {
-  const [persons, setPersons] = useState([]);
+  const [people, setPeople] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
@@ -16,13 +16,13 @@ const App = () => {
 
   useEffect(() => {
     personService.getAll().then((initialNumbers) => {
-      setPersons(initialNumbers);
+      setPeople(initialNumbers);
     });
   }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const existingPerson = persons.find(({ name }) => name === newName);
+    const existingPerson = people.find(({ name }) => name === newName);
 
     if (!newName || !newNumber) {
       window.alert("You have to provide a name AND a number!");
@@ -40,8 +40,8 @@ const App = () => {
         personService
           .update(changedPersonId, changedPerson)
           .then((returnedPerson) => {
-            setPersons(
-              persons.map((person) =>
+            setPeople(
+              people.map((person) =>
                 person.id !== changedPersonId ? person : returnedPerson
               )
             );
@@ -53,8 +53,8 @@ const App = () => {
             setTimeout(() => {
               setErrorMessage(null);
             }, 5000);
-            setPersons(
-              persons.filter((person) => person.id !== existingPerson.id)
+            setPeople(
+              people.filter((person) => person.id !== existingPerson.id)
             );
           });
 
@@ -79,7 +79,7 @@ const App = () => {
         number: newNumber,
       })
       .then((returnedNumber) => {
-        setPersons((prevState) => [...prevState, returnedNumber]);
+        setPeople((prevState) => [...prevState, returnedNumber]);
       });
 
     setSuccessMessage(`Added ${newName}`);
@@ -105,7 +105,7 @@ const App = () => {
     const { value } = event.target;
     setSearchInput(value);
     setSearchResults(
-      persons.filter(({ name }) =>
+      people.filter(({ name }) =>
         name.toLowerCase().includes(value.toLowerCase())
       )
     );
@@ -114,7 +114,7 @@ const App = () => {
   const handleDeleteClick = (id, name) => {
     if (window.confirm(`Delete ${name} ?`)) {
       personService.remove(id).then(() => {
-        setPersons((prevState) => [
+        setPeople((prevState) => [
           ...prevState.filter((person) => person.id !== id),
         ]);
       });
@@ -143,7 +143,7 @@ const App = () => {
         newNumber={newNumber}
       />
       <People
-        persons={persons}
+        people={people}
         searchResults={searchResults}
         searchInput={searchInput}
         handleDeleteClick={handleDeleteClick}
