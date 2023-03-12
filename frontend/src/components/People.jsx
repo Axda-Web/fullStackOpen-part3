@@ -1,8 +1,8 @@
 import React from "react";
 import Person from "./Person";
 
-const People = ({ persons, searchResults, searchInput, handleDeleteClick }) => {
-  const displayResults = searchInput.length ? searchResults : persons;
+const People = ({ people, searchResults, searchInput, handleDeleteClick }) => {
+  const displayResults = searchInput.length ? searchResults : people;
   return (
     <div>
       <h2>Numbers</h2>
