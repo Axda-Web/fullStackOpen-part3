@@ -45,6 +45,13 @@ const App = () => {
                 person.id !== changedPersonId ? person : returnedPerson
               )
             );
+            setSuccessMessage(`Updated ${existingPerson.name}`);
+            setTimeout(() => {
+              setSuccessMessage(null);
+            }, 5000);
+
+            setNewName("");
+            setNewNumber("");
           })
           .catch((error) => {
             setErrorMessage(
@@ -57,14 +64,6 @@ const App = () => {
               people.filter((person) => person.id !== existingPerson.id)
             );
           });
-
-        setSuccessMessage(`Updated ${existingPerson.name}`);
-        setTimeout(() => {
-          setSuccessMessage(null);
-        }, 5000);
-
-        setNewName("");
-        setNewNumber("");
         return;
       } else {
         setNewName("");
@@ -80,15 +79,21 @@ const App = () => {
       })
       .then((returnedNumber) => {
         setPeople((prevState) => [...prevState, returnedNumber]);
+
+        setSuccessMessage(`Added ${newName}`);
+        setTimeout(() => {
+          setSuccessMessage(null);
+        }, 5000);
+
+        setNewName("");
+        setNewNumber("");
+      })
+      .catch((error) => {
+        setErrorMessage(error.response.data.error);
+        setTimeout(() => {
+          setErrorMessage(null);
+        }, 5000);
       });
-
-    setSuccessMessage(`Added ${newName}`);
-    setTimeout(() => {
-      setSuccessMessage(null);
-    }, 5000);
-
-    setNewName("");
-    setNewNumber("");
   };
 
   const handleNameChange = (event) => {
