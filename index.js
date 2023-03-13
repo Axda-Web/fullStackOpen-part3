@@ -62,12 +62,13 @@ app.get("/api/people/:id", (request, response) => {
   });
 });
 
-app.delete("/api/people/:id", (request, response) => {
-  const id = Number(request.params.id);
-  people = people.filter((person) => person.id !== id);
-
-  response.status(204).end();
-});
+app.delete('/api/people/:id', (request, response, next) => {
+  Person.findByIdAndRemove(request.params.id)
+    .then(result => {
+      response.status(204).end()
+    })
+    .catch(error => next(error))
+})
 
 app.post("/api/people", (request, response) => {
   const body = request.body;
