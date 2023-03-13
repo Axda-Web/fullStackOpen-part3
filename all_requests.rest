@@ -11,7 +11,7 @@ GET http://localhost:3001/api/people/640af38f36bdda11d5b92453
 ###
 
 # Delete person with id
-DELETE http://localhost:3001/api/people/640ec17cc777baf67b0e82cd
+DELETE http://localhost:3001/api/people/640eea14e24aace6a12d417c
 ###
 
 # Add a new person
