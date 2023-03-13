@@ -56,10 +56,16 @@ app.get("/api/people", (request, response) => {
   });
 });
 
-app.get("/api/people/:id", (request, response) => {
-  Person.findById(request.params.id).then((person) => {
-    response.json(person);
-  });
+app.get("/api/people/:id", (request, response, next) => {
+  Person.findById(request.params.id)
+    .then(person => {
+      if (person) {
+        response.json(person)
+      } else {
+        response.status(404).end()
+      }
+    })
+    .catch(error => next(error))
 });
 
 app.delete('/api/people/:id', (request, response, next) => {
