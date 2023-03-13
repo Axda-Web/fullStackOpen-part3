@@ -84,23 +84,23 @@ app.post("/api/people", (request, response) => {
     });
   }
 
-  const alreadyExist = !!people.find((person) => person.name === body.name);
+  // const alreadyExist = !!people.find((person) => person.name === body.name);
 
-  if (alreadyExist) {
-    return response.status(400).json({
-      error: "Person already exist",
-    });
-  }
+  // if (alreadyExist) {
+  //   return response.status(400).json({
+  //     error: "Person already exist",
+  //   });
+  // }
 
-  const person = {
+  const person = new Person({
     name: body.name,
     number: body.number,
     id: generateId(),
-  };
+  });
 
-  people = [...people, person];
-
-  response.json(person);
+  person.save().then(savedPerson => {
+    response.json(savedPerson)
+  })
 });
 
 const PORT = process.env.PORT;
