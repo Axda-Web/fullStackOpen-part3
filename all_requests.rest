@@ -22,3 +22,13 @@ Content-Type: application/json
     "name": "Roger Petit",
     "number": "01 23 45 67 89"
 }
+###
+
+# Update person number
+PUT http://localhost:3001/api/people/640eec0b76d168ffaef34b29
+Content-Type: application/json
+
+{
+    "name": "Roger Petit",
+    "number": "11 22 33 44 55"
+}
